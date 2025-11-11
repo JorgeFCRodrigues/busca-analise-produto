@@ -5,23 +5,21 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait 
 
 import pandas as pd
-import time
+
 
 entrada = input('Digite o produto que deseja pesquisar: ')
 
 driver = webdriver.Chrome()
-driver.get('https://www.mercadolivre.com.br/')
 wait = WebDriverWait(driver, 8)
-time.sleep(2)
+driver.get('https://www.mercadolivre.com.br/')
 driver.find_element(By.CLASS_NAME, 'nav-search-input').send_keys(entrada+Keys.ENTER)
-time.sleep(3)
 
-items = driver.find_elements(By.XPATH, '//li[@class="ui-search-layout__item"]')
-print(f"{len(items)} produtos encontrados.")
+items_ml = driver.find_elements(By.XPATH, '//li[@class="ui-search-layout__item"]')
+print(f"{len(items_ml)} produtos encontrados.")
 
 dados_ml = []
 
-for item_ml in items:
+for item_ml in items_ml:
     title = item_ml.find_element(By.TAG_NAME, 'h3').text
     price = ""
     link = item_ml.find_element(By.CLASS_NAME, 'poly-component__title').get_attribute('href')
@@ -67,7 +65,3 @@ df_ml.to_excel(f"dados_Mercado_Livre.xlsx", index=False)
 print(f"\nArquivo Excel 'dados_Mercado_Livre.xlsx' criado com sucesso!")
 
 driver.quit()
-
-# driver.execute_script("window.open('https://www.kabum.com.br//');")
-# driver.switch_to.window(driver.window_handles[2])
-# time.sleep(5)
