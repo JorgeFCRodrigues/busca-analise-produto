@@ -1,78 +1,126 @@
-# Busca e Análise de Produtos
+# 📦 Busca e Análise de Produto  
+### *Automação de cotação, comparação de preços e geração de relatórios com Python + Selenium*
 
-Uma ferramenta Python que compara preços de produtos em Mercado Livre e Kabum, calcula um score ponderado e gera relatórios em Excel com a melhor oferta.
+Este projeto automatiza a busca de produtos em diferentes e-commerces, coleta preços, avaliações, quantidade de reviews, calcula automaticamente qual é a melhor oferta e gera relatórios completos em Excel.  
+Além disso, o sistema tira **prints automáticos** (screenshots) da página do produto vencedor.
 
-## 🎯 Funcionalidades
+Ideal para setores de **compras**, **estoque**, **reposições** ou qualquer processo que precise comparar rapidamente preços na internet.
 
-- Scraping automático em dois e-commerces
-- Cálculo de score ponderado considerando preço, avaliação e quantidade de reviews
-- Geração de Excel com dados comparativos de ambos os sites
-- Captura de screenshot do melhor produto encontrado
-- Tratamento automático de dados de diferentes formatos
+---
 
-## 📋 Requisitos
+## ✨ Funcionalidades
 
-- Python 3.7+
-- ChromeDriver (compatível com sua versão do Chrome)
+- 🔍 Busca automática do produto informado  
+- 🛒 Scraping em:
+  - Mercado Livre  
+  - Kabum  
+- 📊 Cálculo de Score com NumPy (preço + avaliação + reviews)  
+- 📁 Geração de Excel com abas:
+  - Mercado Livre  
+  - Kabum  
+  - Comparativo  
+- 🖼️ Print automático da página do produto vencedor  
+- 🧹 Tratamento e normalização dos dados  
+- 🧩 Arquitetura modular
 
-## 📦 Instalação
+---
 
-1. Clone ou baixe o projeto
-2. Instale as dependências:
+## 📁 Estrutura do Projeto
 
-```bash
+```
+busca-analise-produto/
+│
+├── main.py
+│
+├── scraping/
+│   ├── mercado_livre.py
+│   └── kabum.py
+│
+├── utils/
+│   └── score_calculator.py
+│
+├── outputs/
+│   ├── prints/
+│   └── excels/
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🚀 Como Executar
+
+### 1️⃣ Clone o repositório  
+```
+git clone https://github.com/JorgeFCRodrigues/busca-analise-produto.git
+cd busca-analise-produto
+```
+
+### 2️⃣ Crie o ambiente virtual  
+```
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3️⃣ Instale as dependências  
+```
 pip install -r requirements.txt
 ```
 
-## 🚀 Como Usar
-
-Execute o programa principal:
-
-```bash
+### 4️⃣ Execute  
+```
 python main.py
 ```
 
-Digite o nome do produto que deseja pesquisar quando solicitado. O programa irá:
+Digite o produto quando solicitado.
 
-- Buscar produtos no Mercado Livre e Kabum
-- Processar e normalizar os dados
-- Calcular um score para cada produto
-- Gerar um arquivo Excel em `excels/`
-- Capturar um print do melhor produto em `prints/`
+---
 
-## 📊 Estrutura do Projeto
+## 📊 Sobre o Score
 
-```
-.
-├── main.py
-├── requirements.txt
-├── excels/
-└── prints/
-```
+O score é calculado considerando:
 
-## 🧮 Fórmula do Score
+| Fator     | Peso |
+|-----------|------|
+| Preço     | 70%  |
+| Avaliação | 30%  |
+| Reviews   | Aumentam a confiança |
 
-```
-score = 0.7 × preço_normalizado + 0.3 × nota_normalizada × (1 + reviews_normalizado)
-```
+Os valores são normalizados com NumPy para precisão e eficiência.
 
-Onde:
-- **Preço normalizado**: quanto menor o preço, maior a pontuação
-- **Nota normalizada**: escala de 0 a 5
-- **Reviews normalizado**: quantidade de avaliações (mais confiança)
+---
 
-## 📝 Saída
+## 📁 Saídas Geradas
 
-Após a execução, você receberá:
+📄 Excel em `outputs/excels/`  
+🖼️ Screenshot em `outputs/prints/`  
 
-- ✅ Arquivo Excel com 3 abas: Mercado Livre, Kabum e Comparativo
-- 💰 Preço da melhor oferta exibido no terminal
-- ⭐ Avaliação e quantidade de reviews
-- 🖼️ Screenshot do melhor produto
+---
 
-## ⚠️ Notas Importantes
+## 🧠 Tecnologias
+- Python  
+- Selenium  
+- Pandas  
+- NumPy  
+- OpenPyXL  
 
-- O programa usa Chrome em modo headless para melhor performance
-- Os dados são normalizados antes do cálculo do score
-- Produtos sem preço válido são removidos da análise
-- O ChromeDriver precisa estar na mesma pasta ou no PATH do sistema
+---
+
+## 🤝 Contribuição
+
+1. Fork  
+2. Branch  
+3. Commit  
+4. Push  
+5. Pull Request 🚀  
+
+---
+
+## 📄 Licença
+MIT License
+
+---
+
+## 👨‍💻 Autor
+**Jorge Fernando C. Rodrigues**
